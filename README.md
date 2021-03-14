@@ -1,34 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Design Systems with CSS Variables (in Next.js)
 
-## Getting Started
+This project illustrates how to build design systems with css variables. It's written in a Next.js application, but truthfully it could be applied to almost any project.
 
-First, run the development server:
+![Light Mode CSS Variables](./README_Imgs/Light-Mode.png)
 
-```bash
+<br/>
+
+## Quick start
+
+To get set up, clone this repo and `cd` into the directory. In the terminal, run:
+
+```
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The project will be available at `http://localhost:3002/`
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Concepts
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Classless CSS
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+This approach relies heavily on _classless css_. Essentially, the css prefers to style elements directly (e.g. `h1`), rather than create new classes. Why? The idea is to provide great defaults for all of the elements, and to limit the need for classes or styled components.
 
-## Learn More
+### Global by default
 
-To learn more about Next.js, take a look at the following resources:
+This project defines most css variables in the `:root` of a `globals.css` file. This file, is then used in the top level of the app, in a file called `_app.js`. This ensures that all css variables will be available to components throughout the app.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<hr>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Styled Components
 
-## Deploy on Vercel
+There are in fact a few styled components in this project. They are primarily limited to:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Wrapper Components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- A `Grid` component
+- A `Flex` component
+- A `Page Wrapper` component
+- A `Card` component
+
+These wrapper components exist to wrap and format `child` content. The intent is to allow a little bit of dynamic behavior. For example, the `Grid` component can recieve any number of columns through it's prop, `cols`. Likewise, the `Flex` component can recieve a `flexFlow` prop, to style the content as a column or as a row.
+
+These are intentionally very simple API's, and under the hood they still leverage many of our css variables.
+
+<hr>
+
+## Responsive
+
+All of the content is mobile first and responsive. This is easily accomplished by the following css:
+
+```
+:root {
+      /* layout composition */
+  --grid-layout: block;
+  --flex-layout: block;
+}
+
+@media only screen and (min-width: 720px) {
+  /* convert block layouts to grids and flexs */
+  :root {
+    --grid-layout: grid;
+    --flex-layout: flex;
+  }
+}
+```
+
+All this does is convert elements from `blocks` to `grids` and `flexes`.
+
+## Themes
+
+Because this project is built with css variables, theming is easily available. This project includes both a light and a dark theme, as seen below.
+
+![Light Mode CSS Variables](./README_Imgs/Light-Mode.png)
+![Dark Mode CSS Variables](./README_Imgs/Dark-Mode.png)

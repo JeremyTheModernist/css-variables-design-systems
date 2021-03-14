@@ -1,16 +1,398 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@600;700&display=swap');
+
+/* by default, try and capture values and styling
+   in global css variables
+   by default, also try and style elements, go classless
+   by default, avoid writing complex conditional logic in styled
+   components, instead opt for local variables and styling elements
+   the button is a good example of this.
+*/
+
+/* 
+  By default, define global variables if:
+  they are used more than once for different elements
+  they need to be overwritten for theming purposes
+*/
+:root {
+  /* define colors first */
+  --white: #fffffe;
+  --light-grey-10: #ebeff2;
+  --light-grey-20: #d2d5d9;
+  --light-grey-30: #babcbf;
+  --medium-grey-40: #a1a3a6;
+  --medium-grey-50: #888a8c;
+  --medium-grey-60: #6f7173;
+  --dark-grey-70: #575859;
+  --dark-grey-80: #3e3f40;
+  --dark-grey-90: #252626;
+  --black: #0c0d0d;
+  --dark-blue-100: #001534;
+  --dark-blue-90: #00214d;
+  --dark-blue-80: #1b2d45;
+  --green: #00ebc7;
+  --yellow: #fde24f;
+  --red: #ff5470;
+
+  /* define color intentions */
+  --background: var(--light-grey-10);
+  --card-bg: var(--white);
+  --field-bg: var(--white);
+  --heading-text-color: var(--dark-blue-90);
+  --body-text-color: var(--dark-blue-80);
+  --button-text-color: var(--dark-blue-90);
+  --primary: var(--green);
+  --danger: var(--red);
+  --line-color: var(--light-grey-20);
+  --header-background: var(--dark-blue-90);
+  --header-text-color: var(--light-grey-10);
+  --logo-color: var(--green);
+  --footer-background: var(--dark-blue-90);
+  --footer-text-color: var(--light-grey-20);
+
+  /* fonts */
+  --body-font: 'Open Sans', sans-serif;
+  --heading-font: 'Poppins', sans-serif;
+  --blockquote-font: 'Poppins', sans-serif;
+
+  /* base font size */
+  --base-font-size: 100%;
+
+  /* Font Sizes using major thirds */
+  --font-size-xs: 0.64rem;
+  --font-size-sm: 0.8rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.563rem;
+  --font-size-2xl: 1.953rem;
+  --font-size-3xl: 2.441rem;
+  --font-size-4xl: 3.052rem;
+
+  /* font-weight */
+  --font-weight-heavy: 700;
+  --font-weight-semibold: 600;
+  --font-weight-normal: 400;
+
+  /* line heights */
+  --line-height-xs: 1.15em;
+  --line-height-sm: 1.25em;
+  --line-height-md: 1.5em;
+  --line-height-lg: 1.6em;
+
+  /* Elevation */
+  --shadow-1: 0px 2px 4px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+
+  --shadow-2: 0px 4px 8px -1px rgba(0, 0, 0, 0.1),
+    0px 1px 4px -1px rgba(0, 0, 0, 0.06);
+
+  --shadow-3: 0px 10px 16px -3px rgba(0, 0, 0, 0.1),
+    0px 3px 6px -1px rgba(0, 0, 0, 0.06);
+
+  --shadow-4: 0px 20px 28px -8px rgba(0, 0, 0, 0.1),
+    0px 10px 10px -6px rgba(0, 0, 0, 0.06);
+
+  --shadow-5: 0px 32px 48px -12px rgba(0, 0, 0, 0.15),
+    0px 12px 16px -8px rgba(0, 0, 0, 0.06);
+
+  /* border radius */
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+
+  /* border styles */
+  --line: 1px solid var(--line-color);
+
+  /* spacing based off of base font-size*/
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
+  --space-3xl: 3rem;
+  --space-4xl: 4rem;
+
+  /* layout positioning */
+  --container-padding: 2rem;
+
+  /* layout composition */
+  --grid-layout: block;
+  --grid-gap: var(--space-lg);
+  --flex-layout: block;
 }
 
-a {
-  color: inherit;
+@media only screen and (min-width: 720px) {
+  /* convert block layouts to grids and flexs */
+  :root {
+    --grid-layout: grid;
+    --flex-layout: flex;
+    --base-font-size: 112.5%;
+  }
+}
+
+/* set the base font-size for the whole doc */
+/* use border box, so padding is included in overall width of elements */
+html {
+  font-size: var(--base-font-size);
+  box-sizing: border-box;
+}
+
+/* passes box-sizing down to all children and pseudo elements */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: auto;
+  background: var(--background);
+  color: var(--body-text-color);
+  font-family: var(--body-font);
+  font-weight: var(--font-weight-normal);
+}
+
+/* type styles */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xs);
+  color: var(--heading-text-color);
+  margin: var(--space-md) 0;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: var(--font-size-4xl);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+}
+
+h5 {
+  font-size: var(--font-size-lg);
+}
+
+h6 {
+  font-size: var(--font-size-md);
+}
+
+p {
+  margin: 0;
+  line-height: var(--line-height-lg);
+  max-width: 40em;
+}
+
+p a,
+blockquote a {
+  color: var(--body-text-color);
+  text-decoration: none;
+  border-bottom: 2px solid var(--primary);
+}
+
+blockquote {
+  font-size: var(--font-size-lg);
+  font-family: var(--blockquote-font);
+  max-width: 40em;
+  padding: var(--space-lg);
+  border-radius: var(--border-radius-sm);
+  margin: var(--space-lg) auto;
+}
+
+img {
+  max-width: 100%;
+  border-radius: var(--border-radius-md);
+}
+
+/* button inputs */
+
+button {
+  --button-color: var(--primary);
+  appearance: none;
+  color: var(--button-text-color);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  background-color: var(--button-color);
+  border: none;
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  /* box-shadow: var(--shadow-1); */
+  transition: 0.3s ease-in-out box-shadow;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: var(--shadow-2);
+}
+
+button[disabled] {
+  opacity: 0.4;
+}
+
+button[disabled]:hover {
+  box-shadow: none;
+}
+
+/* use button classes for different colors */
+button.cancel {
+  --button-color: var(--danger);
+}
+
+/* form inputs */
+
+label {
+  display: block;
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-2xs);
+}
+
+input,
+textarea,
+select {
+  font-family: var(--body-font);
+  background: var(--field-bg);
+  color: var(--body-text-color);
+  border: var(--line);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-xs);
+}
+
+textarea {
+  width: 100%;
+  height: var(--space-4xl);
+}
+
+::placeholder {
+  color: var(--light-grey-30);
+}
+
+hr {
+  border: none;
+  border-top: var(--line);
+}
+
+header {
+  background: var(--header-background);
+  color: var(--header-text-color);
+  width: 100%;
+  height: var(--space-3xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--space-md);
+  position: fixed;
+  z-index: 10;
+}
+
+header nav a {
+  text-decoration: none;
+  color: var(--header-text-color);
+}
+
+/* make sure all header links except the first one, have left margin */
+header nav a + a {
+  margin-left: var(--space-md);
+}
+
+.logo {
+  font-size: var(--font-size-lg);
+  color: var(--logo-color);
+  margin: 0;
+}
+
+footer {
+  background: var(--footer-background);
+  color: var(--footer-text-color);
+  padding: 2rem;
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 0;
+  max-width: none;
+}
+
+footer a {
+  color: var(--footer-text-color);
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+footer a + a {
+  margin-left: var(--space-md);
+}
+
+footer h3 {
+  color: var(--footer-text-color);
+}
+
+/* class for layout wrappers */
+/* the calc accounts for the fixed header */
+.layout {
+  padding: calc(2rem + var(--space-3xl)) var(--container-padding);
+  margin: auto;
+  max-width: 1440px;
+}
+
+/* class for grid wrappers */
+/* can dynamically assign more columns with new classes */
+.grid {
+  --grid-columns: 2;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  display: var(--grid-layout);
+  grid-column-gap: var(--grid-gap);
+  /* give all children a bottom margin */
+}
+
+.grid > * {
+  margin-bottom: var(--grid-gap);
+}
+
+/* class for flex wrappers */
+/* can dynamically assign different content treatments with new classes */
+.flex {
+  --justify-content: space-between;
+  display: var(--flex-layout);
+  justify-content: var(--justify-content);
+}
+
+/* give all children a bottom margin */
+.flex > * {
+  margin-bottom: var(--grid-gap);
+}
+
+/* change colors for different themes */
+.dark {
+  /* define color intentions */
+  --background: var(--dark-blue-100);
+  --card-bg: var(--dark-blue-90);
+  --field-bg: var(--background);
+  --heading-text-color: var(--light-grey-10);
+  --body-text-color: var(--light-grey-30);
+  --button-text-color: var(--dark-blue-100);
+  --primary: var(--green);
+  --danger: var(--red);
+  --line-color: var(--dark-grey-70);
+  --header-background: var(--black);
+  --footer-background: var(--black);
+  --footer-text-color: var(--light-grey-20);
+
+  /* border styles */
+  --line: 1px solid var(--line-color);
 }
