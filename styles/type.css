@@ -1,0 +1,41 @@
+.text-preset-body {
+  font-family: var(--body-font);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-heigh-md);
+}
+
+.text-preset-1,
+.text-preset-2,
+.text-preset-3,
+.text-preset-4,
+.text-preset-5,
+.text-preset-6 {
+  font-family: var(--heading-font);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xs);
+}
+
+.text-preset-1 {
+  margin-top: 0;
+  font-size: var(--font-size-4xl);
+}
+
+.text-preset-2 {
+  font-size: var(--font-size-3xl);
+}
+
+.text-preset-3 {
+  font-size: var(--font-size-2xl);
+}
+
+.text-preset-4 {
+  font-size: var(--font-size-xl);
+}
+
+.text-preset-5 {
+  font-size: var(--font-size-lg);
+}
+
+.text-preset-6 {
+  font-size: var(--font-size-md);
+}

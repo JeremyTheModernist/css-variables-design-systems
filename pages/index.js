@@ -6,9 +6,9 @@ import Flex from '../components/Flex';
 import { useEffect } from 'react';
 
 export default function Home() {
-  useEffect(() => {
-    document.body.classList.add('dark');
-  })
+  // useEffect(() => {
+  //   document.body.classList.add('dark');
+  // })
   return (
     <>
       <main>
@@ -68,6 +68,7 @@ export default function Home() {
         <Grid >
           <div style={{marginTop: "var(--space-md)"}}>
             <img src="https://www.jeremysbarnes.com/static/908fc0cc1894ce6292003e8dd29e83e8/47311/03_profile.jpg"></img>
+            <span className="text-preset-6">Text Preset 6</span>
           </div>
 
           <div>

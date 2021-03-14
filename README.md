@@ -24,9 +24,7 @@ This approach relies heavily on _classless css_. Essentially, the css prefers to
 
 ### Global by default
 
-This project defines most css variables in the `:root` of a `globals.css` file. This file, is then used in the top level of the app, in a file called `_app.js`. This ensures that all css variables will be available to components throughout the app.
-
-<hr>
+This project defines most css variables in the `:root` of the `styles/globals.css` file. This file, is then used in the top level of the app, in a file called `_app.js`. This ensures that all css variables will be available to components throughout the app.
 
 ## Styled Components
 
@@ -43,15 +41,13 @@ These wrapper components exist to wrap and format `child` content. The intent is
 
 These are intentionally very simple API's, and under the hood they still leverage many of our css variables.
 
-<hr>
-
 ## Responsive
 
 All of the content is mobile first and responsive. This is easily accomplished by the following css:
 
 ```
 :root {
-      /* layout composition */
+  /* layout composition */
   --grid-layout: block;
   --flex-layout: block;
 }
@@ -73,3 +69,23 @@ Because this project is built with css variables, theming is easily available. T
 
 ![Light Mode CSS Variables](./README_Imgs/Light-Mode.png)
 ![Dark Mode CSS Variables](./README_Imgs/Dark-Mode.png)
+
+## Text Presets
+
+To keep typography consistent throughout your site, I've also provided a `styles/type.css` file, which provides 7 `text-presets`. Each of these classes, mimics the `body` and `h1` through `h6` styles. Now, these classes can be applied to any text throughout your site, to give it the same treatment as your other text.
+
+## Tools
+
+The following websites are helpful for determining areas like:
+
+- color
+- type scale
+- type pairings
+- naming conventions
+
+Websites:
+
+- [Happy Hues](https://www.happyhues.co/)
+- [Font Pair](https://www.fontpair.co/)
+- [Type Scale](https://type-scale.com/)
+- [Naming Typography CSS Variables](https://foxland.fi/naming-typography-css-variables/)
